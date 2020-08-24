@@ -1,11 +1,42 @@
-import React from 'react';
-import 'App.scss';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-function App() {
+import Navbar from './components/layout/Navbar';
+import Homepage from './components/layout/Homepage';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+
+import './app.scss';
+
+// Redux
+import { Provider } from 'react-redux';
+import store from './store/store';
+import setAuthToken from './utils/setAuthToken';
+import { loadUser } from './actions/auth';
+
+// Check for existing auth token
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
+const App = () => {
+  
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, [])
+
   return (
-    <div className="App">
-     	app
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Navbar />
+        <Route exact path="/" component={Homepage} />
+
+        <Switch>
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 
