@@ -88,6 +88,7 @@ router.put('/:id', auth, async (req, res) => {
 		if (!pub) res.status(404).send('no pub available for update');
 
 		pub.pubName = req.body.pubName;
+		pub.adress = req.body.adress;
 		pub.rentPrice = req.body.rentPrice;
 		pub.capacity = req.body.capacity;
 		pub.additionalPersonnel = req.body.additionalPersonnel;

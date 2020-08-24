@@ -11,6 +11,9 @@ const PubSchema = new Schema({
     type: String,
     required: true
   },
+  adress: {
+    type: String
+  },
   rentPrice: {
     type: Number,
     required: true
