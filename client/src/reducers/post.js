@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
       return {...state, posts: payload};
     
     case POST_LOADED:
-    return {...state, currentPost: payload};
+      return {...state, currentPost: payload};
 
     case ERROR_LOAD: {
       return state;

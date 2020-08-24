@@ -44,10 +44,9 @@ export const loadPost = (id) => async dispatch => {
 
 // add a new post
 export const handleAddPost = (newPost) => async dispatch => {
-
   try {
     const posts = await axios.post('/post', newPost);
-    
+    console.log(newPost);
     dispatch({
       type: ADD_POST,
       payload: [ posts ]
@@ -59,6 +58,7 @@ export const handleAddPost = (newPost) => async dispatch => {
     dispatch({
       type: ERROR_LOAD
     });
+    console.log(error);
   }
 };
 
@@ -66,10 +66,11 @@ export const handleAddPost = (newPost) => async dispatch => {
 export const handleDeletePost = id => async dispatch => {
   try {
     const res = await axios.delete('/post/' + id);
-
+    console.log(res);
+    
     dispatch({
       type: DELETE_POST,
-      payload: res.data
+      payload: [res.data]
     });
     dispatch(loadPosts());
 
@@ -88,7 +89,7 @@ export const handleUpdatePost = (id, newPost) => async dispatch => {
   const data = res.data;
 
   try {
-    await axios.post('/post/' + id, newPost);
+    await axios.put('/post/' + id, newPost);
 
     dispatch({
       type: UPDATE_POST,
@@ -96,7 +97,6 @@ export const handleUpdatePost = (id, newPost) => async dispatch => {
     });
     dispatch(loadPosts());
 
-    console.log('updated post', newPost);
   } catch (error) {
     dispatch({
       type: ERROR_LOAD
