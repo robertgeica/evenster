@@ -1,42 +1,42 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 // Redux
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { logout } from '../../actions/auth';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logout } from "../../actions/auth";
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
-    const userLinks = (
-        <div className="links">
-            <Link to="/posts">Posts</Link>
-            <Link onClick={logout} to="/login">Logout</Link>
-        </div>
-    );
+  return (
+    <nav className="navbar">
+      <h1>
+        <Link to="/">Evenster</Link>
+      </h1>
 
-    const guestLinks = (
-        <div className="links">
-            <Link to="/register">Register</Link>
-            <Link to="/login">Login</Link>
-        </div>
-    );
-
-    return (
-        <nav className="navbar">
-		
-			<h1>
-				<Link to="/">Evenster</Link>
-			</h1>
-			{!loading && <Fragment>{isAuthenticated ? userLinks : guestLinks}</Fragment>}
-		</nav>
-    );
+      <div className="links">
+        <Link to="/#search">Search</Link>
+        {!loading && (
+          <div className='admin'>
+            {isAuthenticated ? (
+              <Fragment>
+                <Link to="/posts">Posts</Link>
+                <Link onClick={logout} to="/login">
+                  Logout
+                </Link>
+              </Fragment>
+            ) : null}
+          </div>
+        )}
+      </div>
+    </nav>
+  );
 };
 
 Navbar.propTypes = {
-    logout: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({ auth: state.auth });
+const mapStateToProps = (state) => ({ auth: state.auth });
 
 export default connect(mapStateToProps, { logout })(Navbar);

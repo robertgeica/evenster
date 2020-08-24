@@ -4,19 +4,18 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const Homepage = ({ auth: { isAuthenticated, loading } }) => {
-	const loggedUser = (
-		<div className="homepage">
-			<h3>Welcome back!</h3>
-		</div>
-	);
+import './homepage.scss'
 
-	const guestUser = (
-		<div className="landing">
-			<h3>Hello stranger</h3>
-		</div>
-	);
-	return <Fragment>{!loading && <Fragment>{isAuthenticated ? loggedUser : guestUser}</Fragment>}</Fragment>;
+import image from '../../assets/unnamed.jpg'
+
+const Homepage = ({ auth: { isAuthenticated, loading } }) => {
+	return(
+
+	<div className="image-landing">
+		<img src={image} alt="" className='image'/>
+	</div>
+
+	)
 };
 
 Homepage.propTypes = {
