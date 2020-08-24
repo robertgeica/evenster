@@ -1,0 +1,52 @@
+.card{
+    max-width: 290px;
+    margin: 30px;
+    min-width: 250px;
+    position: relative;
+    text-align: left;
+}
+.media{
+    height:180px;
+}
+.MuiSvgIcon-root{
+    height:0.8em!important;
+}
+.aditional{
+    font-size: 10px!important;
+}
+.text{
+    display: flex;
+    margin: 5px 0;
+
+    .capacity{
+        margin-right: 16px;
+    }
+}
+
+.price{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: black;
+    background: white;
+    font-size: 20px!important;
+    text-align: center;
+    padding: 10px;
+    line-height: 80% !important;
+    border-radius: 20px;
+}
+.secound-container{
+    height: 100%;
+    width: 80%;
+    float: right;
+
+}
+
+.full-width{
+    max-width: 90%;
+    margin: 0 auto;
+
+    .media{
+        height: 350px;
+    }
+}
