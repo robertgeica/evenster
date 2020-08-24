@@ -10,10 +10,10 @@ import { loadPosts, loadPost, handleAddPost, handleDeletePost, handleUpdatePost 
 
 const Posts = ({ posts, currentPost }) => {
 	const [ post, setPost ] = useState({});
-  const [ toggleModal, setToggleModal ] = useState(undefined);
-  const [ toggleEdit, setToggleEdit ] = useState(undefined);
-  const [ updateId, setUpdateId ] = useState(undefined);
-  
+	const [ toggleModal, setToggleModal ] = useState(undefined);
+	const [ toggleEdit, setToggleEdit ] = useState(undefined);
+	const [ updateId, setUpdateId ] = useState(undefined);
+
 	const onChange = (e) => {
 		const image = e.target.parentNode.childNodes[0].value;
 		const title = e.target.parentNode.childNodes[1].value;
@@ -30,16 +30,25 @@ const Posts = ({ posts, currentPost }) => {
 		setPost(newPost);
 	};
 
-  const handleOpenModal = () => { setToggleModal(true); }
-  const handleCloseModal = () => { setToggleModal(false); }
-  const handleOpenEdit = () => { setToggleEdit(true); }
-  const handleCloseEdit = () => { setToggleEdit(false); }
-
+	const handleOpenModal = () => {
+		setToggleModal(true);
+	};
+	const handleCloseModal = () => {
+		setToggleModal(false);
+	};
+	const handleOpenEdit = () => {
+		setToggleEdit(true);
+	};
+	const handleCloseEdit = () => {
+		setToggleEdit(false);
+	};
 
 	useEffect(() => {
 		store.dispatch(loadPosts());
 		// console.log('loading posts');
 	}, []);
+
+	console.log(post.title);
 
 	return (
 		<div>
@@ -52,22 +61,22 @@ const Posts = ({ posts, currentPost }) => {
 				style={{ overlay: { backgroundColor: 'rgba(0, 0, 0, 0)' } }}
 			>
 				<form onChange={onChange}>
-				<input type="text" name="image" placeholder="image" />
-				<input type="text" name="title" placeholder="title" />
-				<input type="text" name="description" placeholder="description" />
-				<input type="text" name="content" placeholder="content" />
-			</form>
+					<input type="text" name="image" placeholder="image" />
+					<input type="text" name="title" placeholder="title" />
+					<input type="text" name="description" placeholder="description" />
+					<input type="text" name="content" placeholder="content" />
+				</form>
 
-				<button className="button" onClick={() => 
-          { 
-            store.dispatch(handleAddPost(post));
-            handleCloseModal();
-          }
-        }>
+				<button
+					className="button"
+					onClick={() => {
+						store.dispatch(handleAddPost(post));
+						handleCloseModal();
+					}}
+				>
 					Add
 				</button>
 			</Modal>
-
 
 			<Modal
 				isOpen={!!toggleEdit}
@@ -78,23 +87,22 @@ const Posts = ({ posts, currentPost }) => {
 				style={{ overlay: { backgroundColor: 'rgba(0, 0, 0, 0)' } }}
 			>
 				<form onChange={onChange}>
-				<input type="text" name="image" placeholder="image" />
-				<input type="text" name="title" placeholder="title" />
-				<input type="text" name="description" placeholder="description" />
-				<input type="text" name="content" placeholder="content" />
-			</form>
+					<input type="text" defaultValue={post.image} name="image" placeholder="image" />
+					<input type="text" defaultValue={post.title} name="title" placeholder="title" />
+					<input type="text" defaultValue={post.description} name="description" placeholder="description" />
+					<input type="text" defaultValue={post.content} name="content" placeholder="content" />
+				</form>
 
-				<button className="button" onClick={() => 
-          { 
-            store.dispatch(handleUpdatePost(updateId, post));
-            handleCloseEdit();
-          }
-        }>
+				<button
+					className="button"
+					onClick={() => {
+						store.dispatch(handleUpdatePost(updateId, post));
+						handleCloseEdit();
+					}}
+				>
 					Edit
 				</button>
 			</Modal>
-
-			
 
 			<button onClick={handleOpenModal}>Add post</button>
 
@@ -104,14 +112,18 @@ const Posts = ({ posts, currentPost }) => {
 					<p>title: {post.title}</p>
 					<p>description: {post.description}</p>
 					<p>content: {post.content}</p>
-          <p>id: {post._id} </p>
+					<p>id: {post._id} </p>
 					<button onClick={() => store.dispatch(handleDeletePost(post._id))}>Delete</button>
 
-					<button onClick={() => {
-            handleOpenEdit();
-            setUpdateId(post._id);
-            }
-          }>Edit</button>
+					<button
+						onClick={() => {
+							handleOpenEdit();
+							setUpdateId(post._id);
+							setPost(post);
+						}}
+					>
+						Edit
+					</button>
 				</div>
 			))}
 		</div>

@@ -20,6 +20,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             {isAuthenticated ? (
               <Fragment>
                 <Link to="/posts">Posts</Link>
+                <Link to="/pubs">Pubs</Link>
                 <Link onClick={logout} to="/login">
                   Logout
                 </Link>
