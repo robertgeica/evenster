@@ -5,6 +5,8 @@ import Navbar from './components/layout/Navbar';
 import Homepage from './components/layout/Homepage';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import Posts from './components/posts/Posts';
+
 
 import './app.scss';
 
@@ -34,6 +36,7 @@ const App = () => {
         <Switch>
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/posts" component={Posts} />
         </Switch>
       </Router>
     </Provider>

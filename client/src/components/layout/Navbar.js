@@ -9,7 +9,7 @@ import { logout } from '../../actions/auth';
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     const userLinks = (
         <div className="links">
-        
+            <Link to="/posts">Posts</Link>
             <Link onClick={logout} to="/login">Logout</Link>
         </div>
     );

@@ -32,10 +32,10 @@ export const loadPost = (id) => async dispatch => {
       payload: res.data
     });
     console.log('single pot loaded', res.data);
+    
   } catch (error) {
     dispatch({
-      type: POST_LOADED,
-      payload: res.data
+      type: POST_LOADED
     });
     console.log('error loading a single post');
   }
