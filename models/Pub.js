@@ -14,7 +14,7 @@ const PubSchema = new Schema({
   rentPrice: {
     type: Number,
     required: true
-  }.
+  },
   capacity: {
     type: Number,
     required: true
