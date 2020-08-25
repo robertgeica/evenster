@@ -16,14 +16,12 @@ const FileUpload = () => {
 	const handleChangeFile = (e) => {
 		setProgress(0);
 		const file = e.target.files[0];
-		console.log('file is', file);
 		setFile(file);
 	};
 
 	const uploadFile = async () => {
 		const formData = new FormData();
 		formData.append('file', file);
-		console.log(formData);
 		await axios
 			.post('/upload', formData, {
 				onUploadProgress: (ProgressEvent) => {
@@ -32,7 +30,6 @@ const FileUpload = () => {
 				}
 			})
 			.then((res) => {
-				console.log('res is', res);
 				setFiles({
 					name: res.data.name,
 					path: 'http://localhost:4000' + res.data.path

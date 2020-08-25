@@ -46,12 +46,10 @@ const Posts = ({ posts, currentPost }) => {
 		setToggleEdit(false);
 	};
 
-	const [myFiles, setMyFiles] = useState([]);
   const [loading, setLoading] = useState(undefined);
 
 	const getImages = async () => {
 		const res = await axios.get('/upload');
-		setMyFiles(res.data);
     setLoading(false);
 	};
 

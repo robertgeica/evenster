@@ -8,6 +8,8 @@ import FileUpload from '../fileUpload/FileUpload';
 import Modal from 'react-modal';
 import './pubs.scss';
 
+import axios from 'axios';
+
 import {
 	loadPubs,
 	loadPub,
@@ -123,8 +125,16 @@ const Pubs = ({ pubs, currentPubs }) => {
 		setToggleServiceEdit(false);
 	};
 
+
+	const [loading, setLoading] = useState(undefined);
+	const getImages = async () => {
+		const res = await axios.get('/upload');
+    setLoading(false);
+	};
+
 	useEffect(() => {
 		store.dispatch(loadPubs());
+		getImages();
 	}, []);
 
 	return (
@@ -293,7 +303,8 @@ const Pubs = ({ pubs, currentPubs }) => {
 
 			{pubs.map((pub) => (
 				<div key={pub._id} className="pub">
-					<p>pubImage: {pub.pubImage}</p>
+					{loading == false && `/${pub.pubImage}` && <img src={`/${pub.pubImage}`} alt={`${pub.pubImage}`} />}
+
 					<p>pubName: {pub.pubName}</p>
 					<p>pubAdress: {pub.pubAdress}</p>
 					<p>rentPrice: {pub.rentPrice}</p>
