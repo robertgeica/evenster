@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import store from '../../store/store';
 import PropTypes from 'prop-types';
 
+import FileUpload from '../fileUpload/FileUpload';
+
 import Modal from 'react-modal';
 import './pubs.scss';
 
@@ -127,6 +129,8 @@ const Pubs = ({ pubs, currentPubs }) => {
 
 	return (
 		<div className="pubs-container">
+			<FileUpload />
+			
 			{/* add new pub*/}
 			<Modal
 				isOpen={!!toggleModal}

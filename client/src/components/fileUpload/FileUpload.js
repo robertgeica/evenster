@@ -63,7 +63,6 @@ const FileUpload = () => {
 				<button className="button" onClick={uploadFile} >
 					Upload
 				</button>
-				<hr />
 
 				{/* display received image*/}
 				{data.path && <img src={data.path} alt={data.name} />}
@@ -72,6 +71,9 @@ const FileUpload = () => {
 				<input type="text" className="clipboard" defaultValue={data.name}  id="fileFilename" required />
 
         <button className="button" onClick={copyToClipboard}>Copy File Name</button>
+				<hr />
+
+			
 			</div>
 		</div>
 	);
