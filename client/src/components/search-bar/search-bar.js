@@ -47,6 +47,7 @@ const SearchBar = ({ pubs }) => {
       {
         pubs.map(pub => (
           <RestaurantCard
+						key={pub._id}
             image={pub.pubImage}
             name={pub.pubName}
             adress={pub.pubAdress}
