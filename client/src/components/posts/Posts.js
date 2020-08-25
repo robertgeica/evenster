@@ -1,10 +1,13 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, useRef, Fragment } from 'react';
 import { connect } from 'react-redux';
 import store from '../../store/store';
 import Modal from 'react-modal';
+import FileUpload from '../fileUpload/FileUpload';
 
 import PropTypes from 'prop-types';
 import './post.scss';
+
+import axios from 'axios';
 
 import { loadPosts, loadPost, handleAddPost, handleDeletePost, handleUpdatePost } from '../../actions/post';
 
@@ -43,15 +46,26 @@ const Posts = ({ posts, currentPost }) => {
 		setToggleEdit(false);
 	};
 
+	const [myFiles, setMyFiles] = useState([]);
+  const [loading, setLoading] = useState(undefined);
+
+	const getImages = async () => {
+		const res = await axios.get('/upload');
+		setMyFiles(res.data);
+    setLoading(false);
+	};
+
 	useEffect(() => {
 		store.dispatch(loadPosts());
+		getImages();
 		// console.log('loading posts');
 	}, []);
 
-	console.log(post.title);
 
 	return (
-		<div>
+		<div className="post-container">
+			<FileUpload />
+
 			<Modal
 				isOpen={!!toggleModal}
 				onRequestClose={handleCloseModal}
@@ -64,7 +78,7 @@ const Posts = ({ posts, currentPost }) => {
 					<input type="text" name="image" placeholder="image" />
 					<input type="text" name="title" placeholder="title" />
 					<input type="text" name="description" placeholder="description" />
-					<input type="text" name="content" placeholder="content" />
+					<textarea id="content" type="text" name="content" placeholder="content" />
 				</form>
 
 				<button
@@ -90,7 +104,7 @@ const Posts = ({ posts, currentPost }) => {
 					<input type="text" defaultValue={post.image} name="image" placeholder="image" />
 					<input type="text" defaultValue={post.title} name="title" placeholder="title" />
 					<input type="text" defaultValue={post.description} name="description" placeholder="description" />
-					<input type="text" defaultValue={post.content} name="content" placeholder="content" />
+					<textarea id="content" defaultValue={post.content} name="content" placeholder="content" />
 				</form>
 
 				<button
@@ -100,30 +114,38 @@ const Posts = ({ posts, currentPost }) => {
 						handleCloseEdit();
 					}}
 				>
-					Edit
+					Edit post
 				</button>
 			</Modal>
 
-			<button onClick={handleOpenModal}>Add post</button>
+			<button className="button" onClick={handleOpenModal}>
+				Add post
+			</button>
 
 			{posts.map((post) => (
 				<div key={post._id} className="post">
-					<p>img url: {post.image}</p>
-					<p>title: {post.title}</p>
-					<p>description: {post.description}</p>
-					<p>content: {post.content}</p>
-					<p>id: {post._id} </p>
-					<button onClick={() => store.dispatch(handleDeletePost(post._id))}>Delete</button>
+					{loading == false && `/${post.image}` && <img src={`/${post.image}`} alt={`${post.image}`} />}
 
-					<button
-						onClick={() => {
-							handleOpenEdit();
-							setUpdateId(post._id);
-							setPost(post);
-						}}
-					>
-						Edit
-					</button>
+					<h3 id="title">title: {post.title}</h3>
+					<h4 id="description">description: {post.description}</h4>
+					<p id="content">content: {post.content}</p>
+					<p>id: {post._id} </p>
+					<div className="action-buttons">
+						<button className="button" onClick={() => store.dispatch(handleDeletePost(post._id))}>
+							Delete
+						</button>
+
+						<button
+							className="button"
+							onClick={() => {
+								handleOpenEdit();
+								setUpdateId(post._id);
+								setPost(post);
+							}}
+						>
+							Edit
+						</button>
+					</div>
 				</div>
 			))}
 		</div>

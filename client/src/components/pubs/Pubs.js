@@ -1,99 +1,133 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import store from '../../store/store';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import Modal from 'react-modal';
 import './pubs.scss';
 
-import { loadPubs, loadPub, handleAddPub, handleDeletePub, handleUpdatePub, handleAddPersonnel, handleAddService, handleDeletePersonnel, handleDeleteService, handleEditPersonnel, handleEditService } from '../../actions/pub';
+import {
+	loadPubs,
+	loadPub,
+	handleAddPub,
+	handleDeletePub,
+	handleUpdatePub,
+	handleAddPersonnel,
+	handleAddService,
+	handleDeletePersonnel,
+	handleDeleteService,
+	handleEditPersonnel,
+	handleEditService
+} from '../../actions/pub';
 
+const Pubs = ({ pubs, currentPubs }) => {
+	const [ pub, setPub ] = useState({});
+	const [ personnel, setPersonnel ] = useState({});
+	const [ service, setService ] = useState({});
 
-const Pubs = ({ pubs, currentPubs}) => {
-  const [pub, setPub] = useState({});
-  const [personnel, setPersonnel] = useState({});
-  const [service, setService] = useState({});
+	const [ toggleModal, setToggleModal ] = useState(undefined);
+	const [ toggleEdit, setToggleEdit ] = useState(undefined);
+	const [ togglePersonnel, setTogglePersonnel ] = useState(undefined);
+	const [ toggleService, setToggleService ] = useState(undefined);
 
-  const [toggleModal, setToggleModal] = useState(undefined);
-  const [toggleEdit, setToggleEdit] = useState(undefined);
-  const [togglePersonnel, setTogglePersonnel] = useState(undefined);
-  const [toggleService, setToggleService] = useState(undefined);
+	const [ togglePersonnelEdit, setTogglePersonnelEdit ] = useState(undefined);
+	const [ toggleServiceEdit, setToggleServiceEdit ] = useState(undefined);
 
-	const [togglePersonnelEdit, setTogglePersonnelEdit] = useState(undefined);
-	const [toggleServiceEdit, setToggleServiceEdit] = useState(undefined);
+	const [ pubId, setPubId ] = useState(undefined);
+	const [ workerId, setWorkerId ] = useState(undefined);
+	const [ serviceId, setServiceId ] = useState(undefined);
 
-  const [pubId, setPubId] = useState(undefined);
-	const [workerId, setWorkerId] = useState(undefined);
-	const [serviceId, setServiceId] = useState(undefined);
+	const onChange = (e) => {
+		const pubImage = e.target.parentNode.childNodes[0].value;
+		const pubName = e.target.parentNode.childNodes[1].value;
+		const pubAdress = e.target.parentNode.childNodes[2].value;
+		const rentPrice = e.target.parentNode.childNodes[3].value;
+		const pubCapacity = e.target.parentNode.childNodes[4].value;
+		// const additionalPersonnel = [];
+		// const additionalServices = [];
 
-  const onChange = e => {
-    const pubImage = e.target.parentNode.childNodes[0].value;
-    const pubName = e.target.parentNode.childNodes[1].value;
-    const pubAdress = e.target.parentNode.childNodes[2].value;
-    const rentPrice = e.target.parentNode.childNodes[3].value;
-    const pubCapacity = e.target.parentNode.childNodes[4].value;
-    // const additionalPersonnel = [];
-    // const additionalServices = [];
+		const newPub = {
+			pubImage,
+			pubName,
+			pubAdress,
+			rentPrice,
+			pubCapacity
+		};
 
-    const newPub = {
-      pubImage,
-      pubName,
-      pubAdress,
-      rentPrice,
-      pubCapacity
-    };
+		setPub(newPub);
+	};
 
-    setPub(newPub);
-  };
+	const onChangePersonnel = (e) => {
+		const workerType = e.target.parentNode.childNodes[0].value;
+		const price = e.target.parentNode.childNodes[1].value;
 
-  const onChangePersonnel = e => {
-    const workerType = e.target.parentNode.childNodes[0].value;
-    const price = e.target.parentNode.childNodes[1].value;
+		const newPersonnel = {
+			workerType,
+			price
+		};
 
-    const newPersonnel = {
-      workerType,
-      price
-    };
+		setPersonnel(newPersonnel);
+	};
 
-    setPersonnel(newPersonnel);
-  };
+	const onChangeService = (e) => {
+		const serviceType = e.target.parentNode.childNodes[0].value;
+		const price = e.target.parentNode.childNodes[1].value;
 
-  const onChangeService = e => {
-    const serviceType = e.target.parentNode.childNodes[0].value;
-    const price = e.target.parentNode.childNodes[1].value;
+		const newService = {
+			serviceType,
+			price
+		};
 
-    const newService = {
-      serviceType,
-      price
-    };
+		setService(newService);
+	};
 
-    setService(newService);
-  };
+	const handleOpenModal = () => {
+		setToggleModal(true);
+	};
+	const handleCloseModal = () => {
+		setToggleModal(false);
+	};
+	const handleOpenEdit = () => {
+		setToggleEdit(true);
+	};
+	const handleCloseEdit = () => {
+		setToggleEdit(false);
+	};
+	const handleOpenPersonnel = () => {
+		setTogglePersonnel(true);
+	};
+	const handleClosePersonnel = () => {
+		setTogglePersonnel(false);
+	};
 
-  const handleOpenModal = () => { setToggleModal(true); }
-  const handleCloseModal = () => { setToggleModal(false); }
-  const handleOpenEdit = () => { setToggleEdit(true); }
-  const handleCloseEdit = () => { setToggleEdit(false); }
-  const handleOpenPersonnel = () => { setTogglePersonnel(true); }
-  const handleClosePersonnel = () => { setTogglePersonnel(false); }
+	const handleOpenPersonnelEdit = () => {
+		setTogglePersonnelEdit(true);
+	};
+	const handleClosePersonnelEdit = () => {
+		setTogglePersonnelEdit(false);
+	};
 
-  const handleOpenPersonnelEdit = () => { setTogglePersonnelEdit(true); }
-  const handleClosePersonnelEdit = () => { setTogglePersonnelEdit(false); }
+	const handleOpenService = () => {
+		setToggleService(true);
+	};
+	const handleCloseService = () => {
+		setToggleService(false);
+	};
 
-  const handleOpenService = () => { setToggleService(true); }
-  const handleCloseService = () => { setToggleService(false); }
+	const handleOpenServiceEdit = () => {
+		setToggleServiceEdit(true);
+	};
+	const handleCloseServiceEdit = () => {
+		setToggleServiceEdit(false);
+	};
 
-  const handleOpenServiceEdit = () => { setToggleServiceEdit(true); }
-  const handleCloseServiceEdit = () => { setToggleServiceEdit(false); }
+	useEffect(() => {
+		store.dispatch(loadPubs());
+	}, []);
 
-
-  useEffect(() => {
-    store.dispatch(loadPubs());
-  }, []);
-
-  return (
-		<div>
-      {/* add new pub*/}
+	return (
+		<div className="pubs-container">
+			{/* add new pub*/}
 			<Modal
 				isOpen={!!toggleModal}
 				onRequestClose={handleCloseModal}
@@ -121,7 +155,7 @@ const Pubs = ({ pubs, currentPubs}) => {
 				</button>
 			</Modal>
 
-      {/* edit a pub*/}
+			{/* edit a pub*/}
 			<Modal
 				isOpen={!!toggleEdit}
 				onRequestClose={handleCloseEdit}
@@ -199,7 +233,7 @@ const Pubs = ({ pubs, currentPubs}) => {
 				</button>
 			</Modal>
 
-      {/* add service */}
+			{/* add service */}
 			<Modal
 				isOpen={!!toggleService}
 				onRequestClose={handleCloseService}
@@ -234,7 +268,7 @@ const Pubs = ({ pubs, currentPubs}) => {
 				style={{ overlay: { backgroundColor: 'rgba(0, 0, 0, 0)' } }}
 			>
 				<form onChange={onChangeService}>
-					<input type="text" name="serviceType"  placeholder="serviceType" />
+					<input type="text" name="serviceType" placeholder="serviceType" />
 					<input type="text" name="price" placeholder="price" />
 				</form>
 
@@ -249,17 +283,9 @@ const Pubs = ({ pubs, currentPubs}) => {
 				</button>
 			</Modal>
 
-
-
-			
-
-			
-
-
-
-
-
-			<button onClick={handleOpenModal}>Add pub</button>
+			<button className="button" onClick={handleOpenModal}>
+				Add pub
+			</button>
 
 			{pubs.map((pub) => (
 				<div key={pub._id} className="pub">
@@ -270,90 +296,110 @@ const Pubs = ({ pubs, currentPubs}) => {
 					<p>pubCapacity: {pub.pubCapacity}</p>
 					<p>id: {pub._id} </p>
 
-          <div>Additional personnel: </div>
-          {
-            pub.additionalPersonnel.map(worker => (
-              <Fragment key={worker._id}>
-                <p>Worker: {worker.workerType}</p>
-                <p>Price: {worker.price}</p>
-                <button 
+					<h3>Additional personnel: </h3>
+					{pub.additionalPersonnel.map((worker) => (
+						<Fragment key={worker._id}>
+							<p>Worker: {worker.workerType}</p>
+							<p>Price: {worker.price}</p>
+							<div className="action-buttons">
+								<button
+									className="button"
 									onClick={() => {
 										store.dispatch(handleDeletePersonnel(pub._id, worker._id));
 									}}
-								>delete</button>
-                <button
+								>
+									Delete
+								</button>
+								<button
+									className="button"
 									onClick={() => {
 										handleOpenPersonnelEdit();
 										setPubId(pub._id);
 										setWorkerId(worker._id);
 									}}
-								>edit</button>
-              </Fragment>
-            ))
-          }
+								>
+									Edit
+								</button>
+							</div>
+						</Fragment>
+					))}
 
-          <div>Additional services: </div>
-          {
-            pub.additionalServices.map((service) => {
-              // console.log(service);
-              return (
-              <Fragment key={service._id}>
-                <p>Worker: {service.serviceType}</p>
-                <p>Price: {service.price}</p>
-                <button 
-									onClick={() => {
-										store.dispatch(handleDeleteService(pub._id, service._id));
-									}}
-								>delete</button>
-                <button
-									onClick={
-										() => {
+					<h3>Additional services: </h3>
+					{pub.additionalServices.map((service) => {
+						// console.log(service);
+						return (
+							<Fragment key={service._id}>
+								<p>Worker: {service.serviceType}</p>
+								<p>Price: {service.price}</p>
+								<div className="action-buttons">
+									<button
+										className="button"
+										onClick={() => {
+											store.dispatch(handleDeleteService(pub._id, service._id));
+										}}
+									>
+										Delete
+									</button>
+									<button
+										className="button"
+										onClick={() => {
 											handleOpenServiceEdit();
 											setPubId(pub._id);
 											setServiceId(service._id);
-										}
-									}
-								>edit</button>
-              </Fragment>
-            )})
-          }
+										}}
+									>
+										Edit
+									</button>
+								</div>
+							</Fragment>
+						);
+					})}
 
+					<div className="action-buttons">
+						<button className="button" onClick={() => store.dispatch(handleDeletePub(pub._id))}>
+							Delete
+						</button>
 
-				  <button onClick={() => store.dispatch(handleDeletePub(pub._id))}>Delete</button>
-					<button
-						onClick={() => {
-							handleOpenEdit();
-							setPubId(pub._id);
-							setPub(pub);
-						}}
-					>
-						Edit
-					</button>
+						<button
+							className="button"
+							onClick={() => {
+								handleOpenEdit();
+								setPubId(pub._id);
+								setPub(pub);
+							}}
+						>
+							Edit
+						</button>
 
-          <button
-            onClick={() => {
-              handleOpenPersonnel();
-              setPubId(pub._id);
+						<button
+							className="button"
+							onClick={() => {
+								handleOpenPersonnel();
+								setPubId(pub._id);
+							}}
+						>
+							Add personnel
+						</button>
 
-            }}
-          >Add personnel</button>
-
-          <button
-            onClick={() => {
-              handleOpenService();
-              setPubId(pub._id);
-            }}
-          >Add service</button>
+						<button
+							className="button"
+							onClick={() => {
+								handleOpenService();
+								setPubId(pub._id);
+							}}
+						>
+							Add service
+						</button>
+					</div>
 				</div>
 			))}
 		</div>
 	);
-}
+};
 
-const mapStateToProps = state => ({
-  pubs: state.pub.pubs,
-  currentPub: state.pub.currentPub
+const mapStateToProps = (state) => ({
+	pubs: state.pub.pubs,
+	currentPub: state.pub.currentPub
 });
 
 export default connect(mapStateToProps)(Pubs);
-
