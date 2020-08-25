@@ -6,19 +6,19 @@ import PropTypes from "prop-types";
 
 import "./homepage.scss";
 
-import image from "../../assets/unnamed.jpg";
 import SearchBar from "../search-bar/search-bar";
+import Carousel from '../carosel/carousel';
+import Footer from '../footer/footer';
 
 const Homepage = ({ auth: { isAuthenticated, loading } }) => {
   return (
     <div>
-      <div className="image-landing">
-        <img src={image} alt="" className="image" />
-      </div>
-
+      
+	  <Carousel/>
 	  <SearchBar/>
+	  <Footer/>
+		
 
-	  
     </div>
   );
 };

@@ -1,0 +1,46 @@
+.footer{
+
+    width: 100%;
+    background: #0B0434;
+    h5{
+        color: white;
+        margin: 30px 0;
+        font-size: 20px;
+    }
+    h6{
+        color: #9AA0B9;
+        margin:13px 0;
+        font-size: 12px;
+    }
+        .first-row{
+
+            display: flex;
+            justify-content: space-evenly;
+            padding: 40px 0;
+
+            @media(max-width:460px){
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+            .button{
+
+
+                @media(max-width:460px){
+                    margin: 30px;
+                }
+            }
+        }
+        .secound-row{
+            border-top: 1px solid #9AA0B9;
+
+            padding: 30px;
+            width: 80%;
+            margin: 0 auto;
+            h5{
+                margin: 0;
+                text-align: center;
+            }
+        }
+}
