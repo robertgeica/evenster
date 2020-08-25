@@ -1,4 +1,4 @@
-import { PUBS_LOADED, PUB_LOADED, ADD_PUB, DELETE_PUB, ERROR_LOAD } from '../actions/types';
+import { PUBS_LOADED, PUB_LOADED, ADD_PUB, DELETE_PUB, UPDATE_PUB, ERROR_LOAD } from '../actions/types';
 
 const initialState = {
   pubs: [],
@@ -12,7 +12,8 @@ export default function(state = initialState, action) {
     case PUBS_LOADED:
     case ADD_PUB:
     case DELETE_PUB:
-      return {...state, posts: payload};
+    case UPDATE_PUB:
+      return {...state, pubs: payload};
     
     case PUB_LOADED:
       return {...state, currentPub: payload};

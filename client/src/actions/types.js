@@ -20,6 +20,6 @@ export const PUBS_LOADED = 'PUBS_LOADED';
 export const PUB_LOADED = 'PUB_LOADED';
 export const ADD_PUB = 'ADD_PUB';
 export const DELETE_PUB = 'DELETE_PUB';
-// export const UPDATE_PUB = 'UPDATE_PUB';
+export const UPDATE_PUB = 'UPDATE_PUB';
 
 

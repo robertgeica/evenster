@@ -7,18 +7,21 @@ const PubSchema = new Schema({
     required: true
   },
 
+  pubImage: {
+    type: String
+  },
   pubName: {
     type: String,
     required: true
   },
-  adress: {
+  pubAdress: {
     type: String
   },
   rentPrice: {
     type: Number,
     required: true
   },
-  capacity: {
+  pubCapacity: {
     type: Number,
     required: true
   },
