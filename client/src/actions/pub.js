@@ -29,11 +29,12 @@ export const loadPub = (id) => async dispatch => {
       type: PUB_LOADED,
       payload: res.data
     });
-    console.log('pubs loaded', res.data);
+    console.log('pub loaded', res.data);
   } catch (error) {
     dispatch({
       type: ERROR_LOAD
     });
+    console.log('error loading pub');
   }
 };
 

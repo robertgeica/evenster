@@ -125,11 +125,10 @@ const Pubs = ({ pubs, currentPubs }) => {
 		setToggleServiceEdit(false);
 	};
 
-
-	const [loading, setLoading] = useState(undefined);
+	const [ loading, setLoading ] = useState(undefined);
 	const getImages = async () => {
 		const res = await axios.get('/upload');
-    setLoading(false);
+		setLoading(false);
 	};
 
 	useEffect(() => {
@@ -140,7 +139,7 @@ const Pubs = ({ pubs, currentPubs }) => {
 	return (
 		<div className="pubs-container">
 			<FileUpload />
-			
+
 			{/* add new pub*/}
 			<Modal
 				isOpen={!!toggleModal}

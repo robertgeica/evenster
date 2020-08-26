@@ -7,6 +7,8 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Posts from './components/posts/Posts';
 import Pubs from './components/pubs/Pubs';
+import SinglePost from './components/posts/SinglePost';
+import SinglePub from './components/pubs/SinglePub';
 
 
 import './app.scss';
@@ -38,7 +40,9 @@ const App = () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/posts" component={Posts} />
+          <Route exact path="/posts/:id" component={SinglePost} />
           <Route exact path="/pubs" component={Pubs} />
+          <Route exact path="/pubs/:id" component={SinglePub} />
         </Switch>
       </Router>
     </Provider>

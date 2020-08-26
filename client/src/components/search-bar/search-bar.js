@@ -5,7 +5,9 @@ import store from '../../store/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-import RestaurantCard from './restaurant-card/restaurant-card';
+// import RestaurantCard from './restaurant-card/restaurant-card';
+import PubCard from '../pubs/PubCard';
+
 import image from '../../assets/unnamed.jpg';
 
 import { loadPubs } from '../../actions/pub';
@@ -16,10 +18,9 @@ const SearchBar = ({ pubs }) => {
 
   useEffect(() => {
 		store.dispatch(loadPubs());
-		console.log('loading pubs');
+		// console.log('loading pubs');
 	}, []);
 
-  console.log(pubs);
 
 	return (
 		<div className="restaurants">
@@ -43,20 +44,7 @@ const SearchBar = ({ pubs }) => {
 					<FontAwesomeIcon icon={faSearch} />
 				</button>
 			</form>
-			<h2>Active</h2>
-      {
-        pubs.map(pub => (
-          <RestaurantCard
-						key={pub._id}
-            image={pub.pubImage}
-            name={pub.pubName}
-            adress={pub.pubAdress}
-            price={pub.rentPrice}
-            capacity={pub.pubCapacity}
-            id={pub._id}
-          />
-        ))
-      }
+
 		</div>
 	);
 };

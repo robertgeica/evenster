@@ -11,6 +11,8 @@ import Carousel from '../carosel/carousel';
 import Footer from '../footer/footer';
 
 import ContactForm from '../contact-form/ContactForm';
+import FirstPagePubs from '../pubs/FirstPagePubs';
+import FirstPagePosts from '../posts/FirstPagePosts';
 
 const Homepage = ({ auth: { isAuthenticated, loading } }) => {
   return (
@@ -18,6 +20,8 @@ const Homepage = ({ auth: { isAuthenticated, loading } }) => {
       
 	  <Carousel />
 	  <SearchBar />
+    <FirstPagePubs />
+    <FirstPagePosts />
     <ContactForm />
 	  <Footer />
 		
