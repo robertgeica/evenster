@@ -5,9 +5,16 @@
   flex-direction: column;
   color: black;
 
-  .posts{
+  .posts {
     display: flex;
     flex-wrap: wrap;
   }
 
 }
+
+@media(max-width: 789px) {
+  .posts {
+    justify-content: center;
+  }
+}
+

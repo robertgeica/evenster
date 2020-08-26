@@ -24,7 +24,7 @@ const FileUpload = () => {
 		await axios
 			.post('/upload', formData, {
 				onUploadProgress: (ProgressEvent) => {
-					let progress = Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + '%';
+					let progress = Math.round(ProgressEvent.loaded / ProgressEvent.total * 100);
 					setProgress(progress);
 				}
 			})
@@ -50,10 +50,10 @@ const FileUpload = () => {
 	return (
 		<div>
 			<div className="file-upload">
-				<input className="button" type="file" ref={el} onChange={handleChangeFile} />
+				<input className="button upload-button" type="file" ref={el} onChange={handleChangeFile} />
 
-				<div className="progessBar" style={{ width: progress }}>
-					{progress}
+				<div className="progessBar" >
+					{progress}%
 				</div>
 
 				<button className="button" onClick={uploadFile} >
@@ -61,9 +61,9 @@ const FileUpload = () => {
 				</button>
 
 				{/* display received image*/}
-				{data.path && <img src={data.path} alt={data.name} />}
+				{ /* data.path && <img src={data.path} alt={data.name} /> */}
 
-
+				<br />
 				<input type="text" className="clipboard" defaultValue={data.name}  id="fileFilename" required />
 
         <button className="button" onClick={copyToClipboard}>Copy File Name</button>
