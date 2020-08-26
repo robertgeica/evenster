@@ -1,0 +1,24 @@
+.Image{
+    width: 100%;
+    height: 400px;
+
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    padding: 0 80px;
+
+    span{
+        margin: 0;
+        font-size: 10px;
+    }
+    h3{
+        font-size: 40px;
+        margin: 20px 0;
+    }
+    p{
+        margin: 0;
+
+    }
+}

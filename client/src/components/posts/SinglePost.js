@@ -10,6 +10,7 @@ import store from '../../store/store';
 
 import CardMedia from '@material-ui/core/CardMedia';
 
+import './SinglePost.scss'
 
 
 const SinglePost = (props) => {
@@ -18,17 +19,21 @@ const SinglePost = (props) => {
 	}, []);
 
 	const post = props.currentPost;
+  	console.log('post is', post);
 
-  console.log('post is', post);
 
 	return (
 		<div key={post._id} className="post">
-
-      <img src={`/${post.image}`} alt={`${post.image}`} />
-			<p>Data: {post.date}</p>
-			<p>Titlu: {post.title}</p>
-			<p>Descriere: {post.description}</p>
-			<p>Content: {post.content}</p>
+      <img src={`/${post.image}`} className="Image" alt={`${post.image}`} />
+		{console.log(post.date)}
+	  <div className="text">
+	  		{post.date == undefined ? null : 
+            	<span >{post.date.slice(0, 9)}</span>
+            }
+			<h3> {post.title}</h3>
+			<p> {post.description}</p>
+			<p> {post.content}</p>
+	  </div>
 
 
 		</div>
