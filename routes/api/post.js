@@ -6,9 +6,9 @@ const auth = require('../../middleware/auth');
 
 // @route           GET /post
 // @description     Test route
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
 	try {
-		const query = { userId: req.user.id };
+		const query = { userId: req.body.id };
 		const post = await Post.find(query);
 
 		console.log(req.body);
@@ -22,15 +22,12 @@ router.get('/', auth, async (req, res) => {
 
 // @route           GET /post/:id
 // @description     Test route
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', async (req, res) => {
 	try {
 		let id = await req.params.id;
 		const post = await Post.findById(id);
 
-		if (post.userId !== req.user.id) {
-			console.log('not allowed to see this post');
-		}
-
+		
 		res.json(post);
 	} catch (error) {
 		res.status(400).send('Error getting the post.');
@@ -63,9 +60,6 @@ router.delete('/:id', auth, async (req, res) => {
 
 		const post = await Post.findOne({ _id: id, userId });
 
-		if (post.userId !== userId) {
-			console.log('not allowed to delete post');
-		}
 
 		const posts = await Post.findByIdAndRemove({ _id: id });
 		res.send(post);

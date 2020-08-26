@@ -75,6 +75,8 @@ const SearchBar = ({ pubs }) => {
 	);
 };
 
+
+
 const mapStateToProps = (state) => ({
 	pubs: state.pub.pubs
 });

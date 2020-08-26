@@ -6,9 +6,9 @@ const auth = require('../../middleware/auth');
 
 // @route           GET /pub
 // @description     Test route
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
 	try {
-		const query = { userId: req.user.id };
+		const query = { userId: req.body.id };
 		const pub = await Pub.find(query);
 
 		// console.log(req.body);
@@ -22,14 +22,11 @@ router.get('/', auth, async (req, res) => {
 
 // @route           GET /pub/:id
 // @description     Test route
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', async (req, res) => {
 	try {
 		let id = await req.params.id;
 		const pub = await Pub.findById(id);
 
-		if (pub.userId !== req.user.id) {
-			console.log('not allowed to see this pub');
-		}
 
 		res.json(pub);
 	} catch (error) {
@@ -60,11 +57,8 @@ router.delete('/:id', auth, async (req, res) => {
 		let id = await req.params.id;
 		let userId = req.user.id;
 
-		const pub = await Pub.findOne({ _id: id, userId });
+		const pub = await Pub.findOne({ _id: id });
 
-		if (pub.userId !== userId) {
-			console.log('not allowed to delete pub');
-		}
 
 		const pubs = await Pub.findByIdAndRemove({ _id: id });
 		res.send(pub);
@@ -87,10 +81,11 @@ router.put('/:id', auth, async (req, res) => {
 
 		if (!pub) res.status(404).send('no pub available for update');
 
+		console.log(req.body);
 		pub.pubName = req.body.pubName;
-		pub.adress = req.body.adress;
+		pub.pubAdress = req.body.pubAdress;
 		pub.rentPrice = req.body.rentPrice;
-		pub.capacity = req.body.capacity;
+		pub.pubCapacity = req.body.pubCapacity;
 		pub.additionalPersonnel = req.body.additionalPersonnel;
     pub.additionalServices = req.body.additionalServices;
 

@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PubSchema = new Schema({
-  userId: {
-    type: Object,
-    required: true
-  },
-
   pubImage: {
     type: String
   },
