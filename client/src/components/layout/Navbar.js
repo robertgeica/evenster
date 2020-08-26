@@ -18,14 +18,14 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </h1>
 
       <div className="links">
-        <Link to="/#search">Search</Link>
+        <Link className="nav-btn" to="/#search">Search</Link>
         {!loading && (
           <Fragment>
             {isAuthenticated ? (
               <Fragment>
-                <Link to="/posts">Posts</Link>
-                <Link to="/pubs">Pubs</Link>
-                <Link onClick={logout} to="/login">
+                <Link className="nav-btn" to="/posts">Posts</Link>
+                <Link className="nav-btn" to="/pubs">Pubs</Link>
+                <Link className="nav-btn" onClick={logout} to="/login">
                   Logout
                 </Link>
               </Fragment>

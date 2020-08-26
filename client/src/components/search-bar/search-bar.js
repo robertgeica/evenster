@@ -64,13 +64,15 @@ const SearchBar = ({ pubs }) => {
 					<input name="search" type="text" onChange={handleChange('capacity')} />
 				</div>
 
-				<button className="button" onClick={(e) => handleSubmit(e)}>
-					<FontAwesomeIcon icon={faSearch} />
-				</button>
+				<div className="search-buttons">
+					<button className="button" onClick={(e) => handleSubmit(e)}>
+						<FontAwesomeIcon icon={faSearch} />
+					</button>
 
-				<button className="button" onClick={() => store.dispatch(loadPubs())}>
-					<FontAwesomeIcon icon={faSync} />
-				</button>
+					<button className="button" onClick={() => store.dispatch(loadPubs())}>
+						<FontAwesomeIcon icon={faSync} />
+					</button>
+				</div>
 			</form>
 		</div>
 	);

@@ -38,3 +38,25 @@
   }
 }
 
+
+// Mobile L
+
+@media (max-width: 768px) {
+  .contact-form-container {
+    .contact-form {
+      width: 80vw;
+      margin: auto;
+
+      input {
+        height: 3em;
+      }
+
+      textarea {
+        height: 6em;
+      }
+    }
+
+   
+  }
+	
+}

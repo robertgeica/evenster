@@ -36,10 +36,15 @@
 }
 
 // Mobile L
+
 @media (max-width: 568px) {
 	.navbar {
 		display: flex;
 		flex-direction: column;
+
+		.nav-btn {
+			font-size: 12px;
+		}
 	}
 	
 }
