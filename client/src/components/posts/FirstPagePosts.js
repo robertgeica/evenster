@@ -27,6 +27,7 @@ const FirstPagePosts = ({ posts }) => {
 	return (
 		<div className="fp-posts-container">
     <h2>Current Posts </h2>
+		<div className="posts">
 			{posts.map((post) => (
 				<PostCard
 						key={post._id}
@@ -36,6 +37,7 @@ const FirstPagePosts = ({ posts }) => {
             post_id={post._id}
           />
 			))}
+			</div>
 		</div>
 	);
 };

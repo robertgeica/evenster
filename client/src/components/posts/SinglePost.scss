@@ -4,7 +4,7 @@
 
 }
 
-.text{
+.text, .pub-container, .pub-details{
     display: flex;
     flex-direction: column;
     padding: 0 80px;
@@ -27,4 +27,34 @@
         margin-bottom: 25px;
         font-size: 15px;
     }
+}
+
+.pub-details{
+    width: 20%;
+    padding: 0;
+    flex-direction: column;
+    margin-right: 4%;
+}
+.pub-container{
+    flex-direction: row;
+}
+
+.aditional{
+    display: flex;
+    flex-direction: column;
+    width: 76%;
+    float: right;
+    position: relative;
+}
+
+.servicii{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.personal{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }

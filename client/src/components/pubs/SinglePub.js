@@ -8,6 +8,8 @@ import { loadPub } from '../../actions/pub';
 import store from '../../store/store';
 // import './blog-page.scss';
 
+import '../posts/SinglePost.scss'
+
 import CardMedia from '@material-ui/core/CardMedia';
 
 const SinglePub = (props) => {
@@ -27,21 +29,26 @@ const SinglePub = (props) => {
 		} else {
 			if (additionalPersonnel.length > 0) {
 				return (
-					<div>
+					<div className="aditional">
 						<h3>Additional Personnel</h3>
+						<div className="personal">
 						{additionalPersonnel.map((pers) => (
 							<Fragment key={pers._id}>
 								<p>worker: {pers.workerType}</p>
 								<p>${pers.price}</p>
 							</Fragment>
 						))}
+						</div>
+						
 						<h3>Additional Services </h3>
+						<div className="servicii">
 						{additionalServices.map((serv) => (
 							<Fragment key={serv._id}>
 								<p>service: {serv.serviceType}</p>
 								<p>${serv.price}</p>
 							</Fragment>
 						))}
+						</div>
 					</div>
 				);
 			}
@@ -50,13 +57,17 @@ const SinglePub = (props) => {
 	};
 	return (
 		<div key={pub._id} className="pub">
-			<img src={`/${pub.pubImage}`} alt={`${pub.pubImage}`} />
-			<p>Name: {pub.pubName}</p>
-			<p>Adress: {pub.pubAdress}</p>
-			<p>Rent Price: {pub.rentPrice}</p>
-			<p>Crt capacity: {pub.pubCapacity}</p>
+			<img src={`/${pub.pubImage}`} alt={`${pub.pubImage}`} className="Image"  />
+			<div className="pub-container">
+				<div className="pub-details">
+			<h3>{pub.pubName}</h3>
+			<p>{pub.pubAdress}</p>
+			<p>Price:{pub.rentPrice}</p>
+			<p>Capacity:{pub.pubCapacity}</p>
+			</div>
 
 			{renderAdditional()}
+			</div>
 		</div>
 	);
 };

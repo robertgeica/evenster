@@ -7,25 +7,22 @@ import PropTypes from "prop-types";
 import "./homepage.scss";
 
 import SearchBar from "../search-bar/search-bar";
-import Carousel from '../carosel/carousel';
-import Footer from '../footer/footer';
+import Carousel from "../carosel/carousel";
+import Footer from "../footer/footer";
 
-import ContactForm from '../contact-form/ContactForm';
-import FirstPagePubs from '../pubs/FirstPagePubs';
-import FirstPagePosts from '../posts/FirstPagePosts';
+import ContactForm from "../contact-form/ContactForm";
+import FirstPagePubs from "../pubs/FirstPagePubs";
+import FirstPagePosts from "../posts/FirstPagePosts";
 
 const Homepage = ({ auth: { isAuthenticated, loading } }) => {
   return (
     <div>
-      
-	  <Carousel />
-	  <SearchBar />
-    <FirstPagePubs />
-    <FirstPagePosts />
-    <ContactForm />
-	  <Footer />
-		
-
+      <Carousel />
+      <SearchBar />
+      <FirstPagePubs />
+      <FirstPagePosts />
+      <ContactForm />
+      <Footer />
     </div>
   );
 };
