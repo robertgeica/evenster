@@ -10,13 +10,16 @@ import SearchBar from "../search-bar/search-bar";
 import Carousel from '../carosel/carousel';
 import Footer from '../footer/footer';
 
+import ContactForm from '../contact-form/ContactForm';
+
 const Homepage = ({ auth: { isAuthenticated, loading } }) => {
   return (
     <div>
       
-	  <Carousel/>
-	  <SearchBar/>
-	  <Footer/>
+	  <Carousel />
+	  <SearchBar />
+    <ContactForm />
+	  <Footer />
 		
 
     </div>

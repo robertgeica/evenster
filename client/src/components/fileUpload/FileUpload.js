@@ -4,7 +4,6 @@ import axios from 'axios';
 import './file-upload.scss';
 
 
-
 const FileUpload = () => {
 	const [ file, setFile ] = useState(''); // store the uploaded file/received file from backend
 	const [ data, setFiles ] = useState({ name: '', path: '' });
@@ -46,7 +45,7 @@ const FileUpload = () => {
     console.log('copied', copyText.value);
   }
 
-  console.log(data.name);
+  // console.log(data.name);
 
 	return (
 		<div>
