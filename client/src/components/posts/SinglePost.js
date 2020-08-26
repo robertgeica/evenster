@@ -31,7 +31,7 @@ const SinglePost = (props) => {
             	<span >{post.date.slice(0, 9)}</span>
             }
 			<h3> {post.title}</h3>
-			<p> {post.description}</p>
+			<p className='description'> {post.description}</p>
 			<p> {post.content}</p>
 	  </div>
 
