@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import store from '../../store/store';
 
@@ -10,41 +10,67 @@ import PubCard from '../pubs/PubCard';
 
 import image from '../../assets/unnamed.jpg';
 
-import { loadPubs } from '../../actions/pub';
+import { loadPubs, sortedPubs } from '../../actions/pub';
 
 import './search-bar.scss';
 
 const SearchBar = ({ pubs }) => {
-
-  useEffect(() => {
+	useEffect(() => {
 		store.dispatch(loadPubs());
 		// console.log('loading pubs');
 	}, []);
 
+	const [ searchBy, setSearchBy ] = useState({});
+	const handleChange = (text) => (e) => {
+		setSearchBy({ ...searchBy, [text]: e.target.value });
+		console.log(searchBy);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		let sPubs = [];
+		console.log('submited');
+
+		pubs.map((pub) => {
+			// pub.pubAdress
+			// pub.pubCapacity
+
+			// searchBy
+
+			if (pub.pubCapacity == searchBy.capacity || 
+				pub.pubAdress.includes(searchBy.city)) 
+			{
+				sPubs.push(pub);
+				store.dispatch(sortedPubs(sPubs));
+				setSearchBy({});
+			}
+			console.log(searchBy);
+		});
+	};
 
 	return (
 		<div className="restaurants">
 			<form className="search-bar">
 				<div className="input-container">
 					<label htmlFor="search">Looking For</label>
-					<input name="search" type="text" />
+					<input name="search" type="text" onChange={handleChange('idk')} />
 				</div>
 
 				<div className="input-container">
 					<label htmlFor="search">City</label>
-					<input name="search" type="text" />
+					<input name="search" type="text" onChange={handleChange('city')} />
 				</div>
 
 				<div className="input-container">
-					<label htmlFor="search">When</label>
-					<input name="search" type="text" />
+					<label htmlFor="search">Capacity</label>
+					<input name="search" type="text" onChange={handleChange('capacity')} />
 				</div>
 
-				<button className="button">
+				<button className="button" onClick={(e) => handleSubmit(e)}>
 					<FontAwesomeIcon icon={faSearch} />
 				</button>
 			</form>
-
 		</div>
 	);
 };
@@ -54,4 +80,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(SearchBar);
-

@@ -19,6 +19,21 @@ export const loadPubs = () => async dispatch => {
   }
 };
 
+// sorted pubs
+export const sortedPubs = (pubs) => async dispatch => {
+
+  try {
+    dispatch({
+      type: PUBS_LOADED,
+      payload: pubs
+    });
+  } catch (error) {
+    dispatch({
+      type: ERROR_LOAD
+    })
+  }
+}
+
 // load a pub by id
 export const loadPub = (id) => async dispatch => {
 
