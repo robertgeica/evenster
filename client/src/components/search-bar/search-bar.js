@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import store from '../../store/store';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
 
 // import RestaurantCard from './restaurant-card/restaurant-card';
 import PubCard from '../pubs/PubCard';
@@ -33,19 +33,18 @@ const SearchBar = ({ pubs }) => {
 		console.log('submited');
 
 		pubs.map((pub) => {
-			// pub.pubAdress
-			// pub.pubCapacity
+			console.log();
 
-			// searchBy
+			if (pub.pubName == searchBy.name ||
+				pub.pubCapacity == searchBy.capacity || 
+				pub.pubAdress.includes(searchBy.city)) {
 
-			if (pub.pubCapacity == searchBy.capacity || 
-				pub.pubAdress.includes(searchBy.city)) 
-			{
 				sPubs.push(pub);
 				store.dispatch(sortedPubs(sPubs));
 				setSearchBy({});
 			}
-			console.log(searchBy);
+			
+			
 		});
 	};
 
@@ -54,7 +53,7 @@ const SearchBar = ({ pubs }) => {
 			<form className="search-bar">
 				<div className="input-container">
 					<label htmlFor="search">Looking For</label>
-					<input name="search" type="text" onChange={handleChange('idk')} />
+					<input name="search" type="text" onChange={handleChange('name')} />
 				</div>
 
 				<div className="input-container">
@@ -69,6 +68,10 @@ const SearchBar = ({ pubs }) => {
 
 				<button className="button" onClick={(e) => handleSubmit(e)}>
 					<FontAwesomeIcon icon={faSearch} />
+				</button>
+
+				<button className="button" onClick={() => store.dispatch(loadPubs())}>
+					<FontAwesomeIcon icon={faSync} />
 				</button>
 			</form>
 		</div>
