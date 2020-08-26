@@ -344,9 +344,9 @@ const Pubs = ({ pubs, currentPubs }) => {
 
 					<h3>Additional services: </h3>
 					{pub.additionalServices != undefined ? (
-						pub.additionalServices.map((worker) => (
+						pub.additionalServices.map((service) => (
 							<Fragment key={service._id}>
-								<p>Worker: {service.serviceType}</p>
+								<p>Service: {service.serviceType}</p>
 								<p>Price: {service.price}</p>
 								<div className="action-buttons">
 									<button
