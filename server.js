@@ -70,7 +70,7 @@ app.get('/upload', (req, res) => {
 
 	fs.readdir('public', (err, files) => {
 		// console.log('all files', files);
-
+	
 		files.forEach((file) => {
 			const newObj = {
 				name: file,

@@ -311,37 +311,40 @@ const Pubs = ({ pubs, currentPubs }) => {
 					<p>id: {pub._id} </p>
 
 					<h3>Additional personnel: </h3>
-					{pub.additionalPersonnel.map((worker) => (
-						<Fragment key={worker._id}>
-							<p>Worker: {worker.workerType}</p>
-							<p>Price: {worker.price}</p>
-							<div className="action-buttons">
-								<button
-									className="button"
-									onClick={() => {
-										store.dispatch(handleDeletePersonnel(pub._id, worker._id));
-									}}
-								>
-									Delete
-								</button>
-								<button
-									className="button"
-									onClick={() => {
-										handleOpenPersonnelEdit();
-										setPubId(pub._id);
-										setWorkerId(worker._id);
-									}}
-								>
-									Edit
-								</button>
-							</div>
-						</Fragment>
-					))}
+					{pub.additionalPersonnel != undefined ? (
+						pub.additionalPersonnel.map((worker) => (
+							<Fragment key={worker._id}>
+								<p>Worker: {worker.workerType}</p>
+								<p>Price: {worker.price}</p>
+								<div className="action-buttons">
+									<button
+										className="button"
+										onClick={() => {
+											store.dispatch(handleDeletePersonnel(pub._id, worker._id));
+										}}
+									>
+										Delete
+									</button>
+									<button
+										className="button"
+										onClick={() => {
+											handleOpenPersonnelEdit();
+											setPubId(pub._id);
+											setWorkerId(worker._id);
+										}}
+									>
+										Edit
+									</button>
+								</div>
+							</Fragment>
+						))
+					) : (
+						console.log('undef')
+					)}
 
 					<h3>Additional services: </h3>
-					{pub.additionalServices.map((service) => {
-						// console.log(service);
-						return (
+					{pub.additionalServices != undefined ? (
+						pub.additionalServices.map((worker) => (
 							<Fragment key={service._id}>
 								<p>Worker: {service.serviceType}</p>
 								<p>Price: {service.price}</p>
@@ -366,8 +369,10 @@ const Pubs = ({ pubs, currentPubs }) => {
 									</button>
 								</div>
 							</Fragment>
-						);
-					})}
+						))
+					) : (
+						console.log('undef')
+					)}
 
 					<div className="action-buttons">
 						<button className="button" onClick={() => store.dispatch(handleDeletePub(pub._id))}>
