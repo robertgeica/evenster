@@ -21,7 +21,7 @@ const SearchBar = ({ pubs }) => {
 
 	const [ searchBy, setSearchBy ] = useState({});
 	const handleChange = (text) => (e) => {
-		setSearchBy({ ...searchBy, [text]: e.target.value });
+		setSearchBy({ ...searchBy, [text]: e.target.value.toLowerCase() });
 		console.log(searchBy);
 	};
 
@@ -32,11 +32,10 @@ const SearchBar = ({ pubs }) => {
 		console.log('submited');
 
 		pubs.map((pub) => {
-			console.log();
-
-			if (pub.pubName == searchBy.name ||
+			
+			if (pub.pubName.toLowerCase() == searchBy.name ||
 				pub.pubCapacity == searchBy.capacity || 
-				pub.pubAdress.includes(searchBy.city)) {
+				pub.pubAdress.toLowerCase().includes(searchBy.city)) {
 
 				sPubs.push(pub);
 				store.dispatch(sortedPubs(sPubs));

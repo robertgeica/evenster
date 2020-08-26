@@ -6,11 +6,15 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 
+import logo from '../../assets/logo.png';
+
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   return (
     <nav className="navbar">
-      <h1>
-        <Link to="/">Evenster</Link>
+      <h1 className="logo">
+        <Link to="/">
+          <img src={logo} alt="Evenster" />
+        </Link>
       </h1>
 
       <div className="links">

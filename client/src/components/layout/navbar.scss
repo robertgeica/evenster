@@ -36,10 +36,12 @@
 }
 
 // Mobile L
-@media (min-width: 425px) {
-	.admin{
-		
+@media (max-width: 568px) {
+	.navbar {
+		display: flex;
+		flex-direction: column;
 	}
+	
 }
 
 // Tablet
