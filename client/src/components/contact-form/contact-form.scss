@@ -1,0 +1,40 @@
+.contact-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto; 
+
+  h2 {
+    color: #fff;
+    margin: 0;
+    padding: 0;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    margin: .2em auto;
+    width: 50vw;
+
+    input, textarea, button {
+      margin: .2em;
+      border: 0;
+      border-radius: 5px;
+      margin: .5em;
+      height: 2em;
+
+    }
+
+    textarea {
+      height: 4em;
+    }
+    button {
+      background-color: #7848F4;
+      font-size: 16px;
+      color: white;
+      
+      cursor: pointer;
+    }
+  }
+}
+
