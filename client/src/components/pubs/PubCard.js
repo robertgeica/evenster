@@ -12,16 +12,26 @@ import store from '../../store/store';
 
 import { loadPub } from '../../actions/pub';
 
-const PubCard = ({ pub, image, name, adress, rentPrice, capacity, additionalPersonnel, additionalServices, pub_id }) => {
+const PubCard = ({
+	pub,
+	image,
+	name,
+	adress,
+	rentPrice,
+	capacity,
+	additionalPersonnel,
+	additionalServices,
+	pub_id
+}) => {
 	// console.log(pub_id);
 	return (
-		<Link
-			onClick={() => {
-				store.dispatch(loadPub(pub_id));
-			}}
-			to={`/pubs/${pub_id}`}
-		>
-			<Card className="card">
+		<Card className="card">
+			<Link
+				onClick={() => {
+					store.dispatch(loadPub(pub_id));
+				}}
+				to={`/pubs/${pub_id}`}
+			>
 				<CardActionArea>
 					<CardMedia className="media" image={image} />
 					<CardContent className="text">
@@ -35,8 +45,8 @@ const PubCard = ({ pub, image, name, adress, rentPrice, capacity, additionalPers
 						</div>
 					</CardContent>
 				</CardActionArea>
-			</Card>
-		</Link>
+			</Link>
+		</Card>
 	);
 };
 

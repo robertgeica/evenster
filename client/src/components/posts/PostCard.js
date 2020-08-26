@@ -15,13 +15,13 @@ import '../search-bar/restaurant-card/restaurant-card.scss';
 
 const PostCard = ({ image, title, description, post_id }) => {
 	return (
-		<Link
-			onClick={() => {
-				store.dispatch(loadPost(post_id));
-			}}
-			to={`/posts/${post_id}`}
-		>
-			<Card className="card">
+		<Card className="card">
+			<Link
+				onClick={() => {
+					store.dispatch(loadPost(post_id));
+				}}
+				to={`/posts/${post_id}`}
+			>
 				<CardActionArea>
 					<CardMedia className="media" image={image} />
 					<CardContent className="text">
@@ -35,8 +35,8 @@ const PostCard = ({ image, title, description, post_id }) => {
 						</div>
 					</CardContent>
 				</CardActionArea>
-			</Card>
-		</Link>
+			</Link>
+		</Card>
 	);
 };
 
