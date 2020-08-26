@@ -16,7 +16,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <div className="links">
         <Link to="/#search">Search</Link>
         {!loading && (
-          <div className='admin'>
+          <Fragment>
             {isAuthenticated ? (
               <Fragment>
                 <Link to="/posts">Posts</Link>
@@ -26,7 +26,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 </Link>
               </Fragment>
             ) : null}
-          </div>
+          </Fragment>
         )}
       </div>
     </nav>

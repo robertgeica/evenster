@@ -8,7 +8,6 @@ import { faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
 // import RestaurantCard from './restaurant-card/restaurant-card';
 import PubCard from '../pubs/PubCard';
 
-import image from '../../assets/unnamed.jpg';
 
 import { loadPubs, sortedPubs } from '../../actions/pub';
 
