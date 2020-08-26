@@ -22,7 +22,7 @@ const SinglePub = (props) => {
 	// console.log(pub.additionalServices);
 
 	const renderAdditional = () => {
-		if (additionalPersonnel == undefined && additionalServices == undefined) {
+		if (additionalPersonnel == undefined || additionalServices == undefined) {
 			console.log('empty');
 		} else {
 			if (additionalPersonnel.length > 0) {
@@ -31,27 +31,21 @@ const SinglePub = (props) => {
 						<h3>Additional Personnel</h3>
 						{additionalPersonnel.map((pers) => (
 							<Fragment key={pers._id}>
-								<p>{pers.workerType}</p>
-								<p>{pers.price}</p>
+								<p>worker: {pers.workerType}</p>
+								<p>${pers.price}</p>
+							</Fragment>
+						))}
+						<h3>Additional Services </h3>
+						{additionalServices.map((serv) => (
+							<Fragment key={serv._id}>
+								<p>service: {serv.serviceType}</p>
+								<p>${serv.price}</p>
 							</Fragment>
 						))}
 					</div>
 				);
 			}
 
-			if (additionalServices.length > 0) {
-				return (
-					<div>
-						<h3>Additional Services </h3>
-						{additionalServices.map((serv) => (
-							<Fragment key={serv._id}>
-								<p>{serv.serviceType}</p>
-								<p>{serv.price}</p>
-							</Fragment>
-						))}
-					</div>
-				);
-			}
 		}
 	};
 	return (

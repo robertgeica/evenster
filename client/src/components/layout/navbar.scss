@@ -5,7 +5,8 @@
 	justify-content: space-between;
 	text-align: center;
 	padding: 1em;
-	background-color: #fff;
+	background-color: $bg-color;
+	border-bottom: 1px solid black;
   	font-family: 'Josefin Sans', sans-serif;
 
 	h1 {
@@ -22,6 +23,7 @@
 		align-self: center;
 		a {
 			color: #fff;
+			font-weight: 600;
 			text-align: center;
 			text-decoration: none;
 			height: 100%;
