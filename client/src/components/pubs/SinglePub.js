@@ -20,20 +20,24 @@ const SinglePub = (props) => {
 	const pub = props.currentPub;
 	const { additionalPersonnel, additionalServices } = pub;
 
-	const [ checkList, setCheckList ] = useState([]);
+  let checklist = [];
 
-	const handleChange = (name, price) => {
-		setCheckList([
-			...checkList,
-      {
-        name: name,
-        price: price,
-        checked: true
-      }
-    ]);
+	const handleReset = (e) => {
+		e.preventDefault();
+		checklist = [];
 	};
 
-  console.log(checkList);
+
+	const handleChange = (name, price) => {
+		
+    let newObj = { name, price };
+    console.log('new obj', newObj);
+
+		checklist.push(newObj);
+
+	console.log(checklist);
+	};
+console.log('out', checklist);
 
 	// console.log(pub.additionalPersonnel);
 	// console.log(pub.additionalServices);
@@ -50,8 +54,8 @@ const SinglePub = (props) => {
 							{additionalPersonnel.map((pers) => (
 								<div key={pers._id} className="aditional-card">
 									<input type="checkbox" name={`${pers.workerType}`} value={`${pers.price}`} />
-									<label for={`${pers.workerType}`}>worker: {pers.workerType}</label>
-									<label for={`${pers.workerType}`}>${pers.price}</label>
+									<label htmlFor={`${pers.workerType}`}>worker: {pers.workerType}</label>
+									<label htmlFor={`${pers.workerType}`}>${pers.price}</label>
 								</div>
 							))}
 						</div>
@@ -64,13 +68,15 @@ const SinglePub = (props) => {
 										type="checkbox"
 										name={`${serv.serviceType}`}
 										value={`${serv.price}`}
-										onChange={() => handleChange(serv.serviceType, serv.price)}
+										onClick={() => handleChange(serv.serviceType, serv.price)}
 									/>
-									<label for={`${serv.serviceType}`}>service: {serv.serviceType}</label>
-									<label for={`${serv.serviceType}`}>${serv.price}</label>
+									<label htmlFor={`${serv.serviceType}`}>service: {serv.serviceType}</label>
+									<label htmlFor={`${serv.serviceType}`}>${serv.price}</label>
 								</div>
 							))}
 						</div>
+
+						<button onClick={e => handleReset(e)}> Reset </button>
 					</form>
 				);
 			}

@@ -56,10 +56,10 @@ export const register = ({ email, password }) => async (dispatch) => {
 
 export const login = (email, password) => async (dispatch) => {
 	const body = { email, password };
-
+	console.log(body);
 	try {
 		const res = await axios.post('/auth', body);
-
+		console.log(res);
 		dispatch({
 			type: LOGIN_SUCCESS,
 			payload: res.data
