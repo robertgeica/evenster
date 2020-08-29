@@ -33,8 +33,8 @@ const SearchBar = ({ pubs }) => {
 
 		pubs.map((pub) => {
 			
-			if (pub.pubName.toLowerCase() == searchBy.name ||
-				pub.pubCapacity == searchBy.capacity || 
+			if (pub.pubName.toLowerCase().includes(searchBy.name) ||
+				pub.pubCapacity >= searchBy.capacity || 
 				pub.pubAdress.toLowerCase().includes(searchBy.city)) {
 
 				sPubs.push(pub);

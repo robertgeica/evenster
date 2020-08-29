@@ -20,7 +20,6 @@ const Footer = () => {
           <h6>Telefon 075342346</h6>
         </div>
 
-        <button className="button">Contacteaza-ne!</button>
       </div>
 
       <div className="secound-row">
