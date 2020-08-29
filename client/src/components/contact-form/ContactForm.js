@@ -26,6 +26,7 @@ const ContactForm = (selected) => {
       selected
     };
 
+    console.log(newForm);
     setDataForm(newForm);
     // console.log(newForm);
   }

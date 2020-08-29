@@ -26,14 +26,25 @@ app.use('/post', require('./routes/api/post'));
 // send mail
 app.post('/sendmail', (req, res) => {
 	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  const {name, email, phone, content} = req.body;
-  console.log('email is', req.body);
+  const {name, email, phone, content, selected} = req.body;
+  console.log('email is', req.body.selected.selected);
 
+
+	console.log(selected.selected);
+
+	const keys = Object.keys(selected.selected);
+	const values = Object.values(selected.selected);
+
+	console.log(keys, values);
 	const msg = {
-		to: '',
-		from: email,
+		to: '@gmail.com',
+		from: '@gmail.com',
 		subject: `${name} are un mesaj!`,
-		html: content
+		html: `Ai primis un email de la ${email}.
+			Continut: ${content}. 
+			Optiuni dorite: ${keys} - ${values}
+		
+		`
 	};
 
 	sgMail.send(msg)
