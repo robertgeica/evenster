@@ -1,107 +1,115 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState, Fragment } from "react";
 
 // Redux
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import { loadPub } from '../../actions/pub';
-import store from '../../store/store';
+import { loadPub } from "../../actions/pub";
+import store from "../../store/store";
 // import './blog-page.scss';
 
-import '../posts/SinglePost.scss';
+import "../posts/SinglePost.scss";
 
-import CardMedia from '@material-ui/core/CardMedia';
+import CardMedia from "@material-ui/core/CardMedia";
+import { useRadioGroup } from "@material-ui/core";
+import ContactForm from "../contact-form/ContactForm";
 
 const SinglePub = (props) => {
-	useEffect(() => {
-		store.dispatch(loadPub(props.match.params.id));
-	}, []);
+  useEffect(() => {
+    store.dispatch(loadPub(props.match.params.id));
+  }, []);
 
-	const pub = props.currentPub;
-	const { additionalPersonnel, additionalServices } = pub;
+  const pub = props.currentPub;
+  const { additionalPersonnel, additionalServices } = pub;
 
-  let checklist = [];
+  const [checkList, setCheckList] = useState ({
 
-	const handleReset = (e) => {
-		e.preventDefault();
-		checklist = [];
-	};
+  })
 
+  
+  const handleChange = (e) =>{
+		const { name,value} = e.target;
+		setCheckList({...checkList,[name]:value})
+  }
 
-	const handleChange = (name, price) => {
-		
-    let newObj = { name, price };
-    console.log('new obj', newObj);
+  // console.log(pub.additionalPersonnel);
+  // console.log(pub.additionalServices);
 
-		checklist.push(newObj);
+  const renderAdditional = () => {
+    if (additionalPersonnel == undefined || additionalServices == undefined) {
+      console.log("empty");
+    } else {
+      if (additionalPersonnel.length > 0) {
+        return (
+          <form className="aditional">
+            <h4>Additional Personnel</h4>
+            <div className="personal">
+              {additionalPersonnel.map((pers) => (
+                <div key={pers._id} className="aditional-card">
+                  <h5 for={`${pers.workerType}`}>
+                    {pers.workerType}
+                  </h5>
+                  <label className="price"for={`${pers.workerType}`}>${pers.price}</label>
+				  <div className='quantity'>
+				  <label for={`${pers.workerType}`}>Quantity: </label><br/>
+				  <input
+					type="text"
+					className='input-aditional'
+                    name={`${pers.workerType}`}
+                    onChange={(e)=>handleChange(e)}
+                  />
+				  </div>
+                </div>
+              ))}
+            </div>
 
-	console.log(checklist);
-	};
-console.log('out', checklist);
+            <h4>Additional Services </h4>
+            <div className="servicii">
+              {additionalServices.map((serv) => (
+                <div key={serv._id} className="aditional-card">
+                  
+                  <h4 for={`${serv.serviceType}`}>
+                    {serv.serviceType}
+                  </h4>
+                  <label className="price"for={`${serv.serviceType}`}>${serv.price}</label>
+				  <div className='quantity'>
+				  <label for={`${serv.serviceType}`}>Quantity: </label>
+				  <input
+					type="text"
+					className='input-aditional'
+                    name={`${serv.serviceType}`}
+                    onChange={(e)=>handleChange(e)}
+                  />
+				  </div>
+                </div>
+              ))}
+            </div>
+          </form>
+        );
+      }
+    }
+  };
+  return (
+    <div key={pub._id} className="pub">
+      <img src={`/${pub.pubImage}`} alt={`${pub.pubImage}`} className="Image" />
+      <div className="pub-container">
+        <div className="pub-details">
+          <h3>{pub.pubName}</h3>
+          <p>{pub.pubAdress}</p>
+          <p>Price:{pub.rentPrice}</p>
+          <p>Capacity:{pub.pubCapacity}</p>
+        </div>
 
-	// console.log(pub.additionalPersonnel);
-	// console.log(pub.additionalServices);
-
-	const renderAdditional = () => {
-		if (additionalPersonnel == undefined || additionalServices == undefined) {
-			console.log('empty');
-		} else {
-			if (additionalPersonnel.length > 0) {
-				return (
-					<form className="aditional">
-						<h3>Additional Personnel</h3>
-						<div className="personal">
-							{additionalPersonnel.map((pers) => (
-								<div key={pers._id} className="aditional-card">
-									<input type="checkbox" name={`${pers.workerType}`} value={`${pers.price}`} />
-									<label htmlFor={`${pers.workerType}`}>worker: {pers.workerType}</label>
-									<label htmlFor={`${pers.workerType}`}>${pers.price}</label>
-								</div>
-							))}
-						</div>
-
-						<h3>Additional Services </h3>
-						<div className="servicii">
-							{additionalServices.map((serv) => (
-								<div key={serv._id} className="aditional-card">
-									<input
-										type="checkbox"
-										name={`${serv.serviceType}`}
-										value={`${serv.price}`}
-										onClick={() => handleChange(serv.serviceType, serv.price)}
-									/>
-									<label htmlFor={`${serv.serviceType}`}>service: {serv.serviceType}</label>
-									<label htmlFor={`${serv.serviceType}`}>${serv.price}</label>
-								</div>
-							))}
-						</div>
-
-						<button onClick={e => handleReset(e)}> Reset </button>
-					</form>
-				);
-			}
-		}
-	};
-	return (
-		<div key={pub._id} className="pub">
-			<img src={`/${pub.pubImage}`} alt={`${pub.pubImage}`} className="Image" />
-			<div className="pub-container">
-				<div className="pub-details">
-					<h3>{pub.pubName}</h3>
-					<p>{pub.pubAdress}</p>
-					<p>Price:{pub.rentPrice}</p>
-					<p>Capacity:{pub.pubCapacity}</p>
-				</div>
-
-				{renderAdditional()}
-			</div>
-		</div>
-	);
+        {renderAdditional()}
+      </div>
+	  <ContactForm selected={checkList}/>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({
-	pubs: state.pub.pubs,
-	currentPub: state.pub.currentPub
+  pubs: state.pub.pubs,
+  currentPub: state.pub.currentPub,
 });
 
 export default connect(mapStateToProps, { loadPub })(SinglePub);

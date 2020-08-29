@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import './contact-form.scss';
 
-const ContactForm = () => {
+const ContactForm = (selected) => {
 
 
   const [dataForm, setDataForm] = useState({}); 
@@ -22,7 +22,8 @@ const ContactForm = () => {
       name,
       email,
       phone,
-      content
+      content,
+      selected
     };
 
     setDataForm(newForm);

@@ -1,6 +1,7 @@
 .Image{
     width: 100%;
-    height: 400px;
+    height: auto;
+    max-height: 450px;
 
 }
 
@@ -8,17 +9,31 @@
     display: flex;
     flex-direction: column;
     padding: 0 80px;
+    @media(max-width:768px){
+        padding: 0 40px;
+    }
 
     span{
         margin: 0;
         font-size: 10px;
     }
     h3{
+        font-size: 60px;
+        margin:50px 0 0px 0;
+        @media(max-width:768px){
+            
+        font-size: 60px;
+        margin:30px 0 25px 0;
+        }
+    }
+    h4{
         font-size: 40px;
-        margin:10px 5px 0 0;
+    }
+    h5{
+        font-size:30px;
     }
     p{
-        margin: 0;
+        margin: 2px 0;
         font-size:20px;
         
 
@@ -58,9 +73,6 @@
         width: 100%;
     }
 
-    input{
-        transform: scale(1.5);
-    }
 
     label{
         font-size: 20px;
@@ -70,21 +82,52 @@
         justify-content: center;
     }
     .aditional-card{
-        width: 250px;
+        width: 300px;
         margin: 30px 20px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        min-height: 300px;
-        background-color: grey;
-        border-radius: 20px;
-        -webkit-box-shadow: 10px 10px 20px -8px rgba(0,0,0,0.75);
--moz-box-shadow: 10px 10px 20px -8px rgba(0,0,0,0.75);
-box-shadow: 10px 10px 20px -8px rgba(0,0,0,0.75);
+        height: 200px;
+        background-color: white;
+        position: relative;
+        border-radius: 10px;
+        -webkit-box-shadow: 10px 10px 28px -7px rgba(0,0,0,0.58);
+-moz-box-shadow: 10px 10px 28px -7px rgba(0,0,0,0.58);
+box-shadow: 10px 10px 28px -7px rgba(0,0,0,0.58);
+        h4{
+            font-size: 28px;
+            margin: 20px 0;
+        }
+        .price{
+            background-color: black;
+            color: white;
+            top: 10px;
+            left:10px;
 
+        }
 
+        input{
+            
+            border:0;
+            border-bottom: 1px solid black;
+            outline: none;
+        }
 
+    }
+    label{
+        margin-right: 5px;
+
+    }
+    .quantity{
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+        margin: 5px;
+    }
+    .input-aditional{
+        max-width: 130px;
+        margin: 10px 2px;
     }
 }
 
