@@ -12,6 +12,8 @@ import store from '../../store/store';
 
 import { loadPub } from '../../actions/pub';
 
+import './pubs.scss'
+
 const PubCard = ({
 	pub,
 	image,
