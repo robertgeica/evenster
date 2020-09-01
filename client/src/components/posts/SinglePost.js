@@ -9,6 +9,7 @@ import store from '../../store/store';
 // import './blog-page.scss';
 
 import CardMedia from '@material-ui/core/CardMedia';
+import Footer from '../footer/footer'
 
 import './SinglePost.scss'
 
@@ -35,7 +36,7 @@ const SinglePost = (props) => {
 			<p> {post.content}</p>
 	  </div>
 
-
+			<Footer/>
 		</div>
 	);
 };

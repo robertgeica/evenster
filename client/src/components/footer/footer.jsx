@@ -8,16 +8,16 @@ const Footer = () => {
       <div className="first-row">
         <div className="social links">
             <h5>Retele Sociale</h5>
-          <h6>Facebook</h6>
-          <h6>Instagram</h6>
-          <h6>Twitter</h6>
+          <a href="">Facebook</a>
+          <a href="">Instagram</a>
+          <a href="">Twitter</a>
         </div>
 
         <div className="adress">
-            <h5>Adresa</h5>
+          <h5>Adresa</h5>
           <h6>Eventster SRL</h6>
-          <h6>Loc. Craiova, str. Elena Farago</h6>
-          <h6>Telefon 075342346</h6>
+          <h6>Loc. Craiova, str. Peles curcanul Nr.3 Bl.B26 Ap.2</h6>
+          <h6>Telefon 0736398895</h6>
         </div>
 
       </div>

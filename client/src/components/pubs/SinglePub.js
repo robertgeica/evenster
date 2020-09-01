@@ -13,6 +13,7 @@ import '../posts/SinglePost.scss';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useRadioGroup } from '@material-ui/core';
 import ContactForm from '../contact-form/ContactForm';
+import Footer from '../footer/footer'
 
 const SinglePub = (props) => {
 	useEffect(() => {
@@ -45,13 +46,13 @@ const SinglePub = (props) => {
 								<div key={pers._id} className="aditional-card">
 									<h5 for={`${pers.workerType}`}>{pers.workerType}</h5>
 									<label className="price" for={`${pers.workerType}`}>
-										${pers.price}
+										RON{pers.price}
 									</label>
 									<div className="quantity">
 										<label for={`${pers.workerType}`}>Quantity: </label>
 										<br />
 										<input
-											type="text"
+											type="number"
 											className="input-aditional"
 											name={`${pers.workerType}`}
 											onChange={(e) => handleChange(e)}
@@ -67,7 +68,7 @@ const SinglePub = (props) => {
 								<div key={serv._id} className="aditional-card">
 									<h4 for={`${serv.serviceType}`}>{serv.serviceType}</h4>
 									<label className="price" for={`${serv.serviceType}`}>
-										${serv.price}
+										RON{serv.price}
 									</label>
 									<div className="quantity">
 										<label for={`${serv.serviceType}`}>Quantity: </label>
@@ -93,14 +94,16 @@ const SinglePub = (props) => {
 				<div className="pub-details">
 					<h3>{pub.pubName}</h3>
 					<p>{pub.pubAdress}</p>
-					<p>Price:{pub.rentPrice}</p>
-					<p>Capacity:{pub.pubCapacity}</p>
+					<p>Price: RON{pub.rentPrice}</p>
+					<p>Capacity: {pub.pubCapacity}</p>
 				</div>
 
 				{renderAdditional()}
 			</div>
       
 			<ContactForm selected={checkList} />
+
+      <Footer/>
 		</div>
 	);
 };

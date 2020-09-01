@@ -33,16 +33,25 @@ const SearchBar = ({ pubs }) => {
 
 		pubs.map((pub) => {
 			
-			if (pub.pubName.toLowerCase().includes(searchBy.name) ||
-				pub.pubCapacity >= searchBy.capacity || 
-				pub.pubAdress.toLowerCase().includes(searchBy.city)) {
+			if( pub.pubName.toLowerCase().includes(searchBy.name)){
+			
 
 				sPubs.push(pub);
 				store.dispatch(sortedPubs(sPubs));
 				setSearchBy({});
-			}
+		
 			
-			
+		}else if(pub.pubAdress.toLowerCase().includes(searchBy.city)){
+			sPubs.push(pub);
+			store.dispatch(sortedPubs(sPubs));
+			setSearchBy({});
+		}else if(pub.pubCapacity >= searchBy.capacity&&parseInt(pub.pubCapacity) < parseInt(searchBy.capacity)+100){
+			sPubs.push(pub);
+			store.dispatch(sortedPubs(sPubs));
+			setSearchBy({});
+		}
+		
+		else{store.dispatch(sortedPubs(sPubs));setSearchBy({});}
 		});
 	};
 
@@ -69,7 +78,7 @@ const SearchBar = ({ pubs }) => {
 						<FontAwesomeIcon icon={faSearch} />
 					</button>
 
-					<button className="button" onClick={() => store.dispatch(loadPubs())}>
+					<button className="button" onClick={(e) =>{e.preventDefault();setSearchBy({}); store.dispatch(loadPubs())}}>
 						<FontAwesomeIcon icon={faSync} />
 					</button>
 				</div>

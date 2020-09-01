@@ -347,7 +347,7 @@ const Pubs = ({ pubs, currentPubs }) => {
 						pub.additionalServices.map((service) => (
 							<Fragment key={service._id}>
 								<p>Service: {service.serviceType}</p>
-								<p>Price: {service.price}</p>
+								<p>Price: RON{service.price}</p>
 								<div className="action-buttons">
 									<button
 										className="button"
