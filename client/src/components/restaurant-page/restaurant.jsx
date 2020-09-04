@@ -1,5 +1,6 @@
 import React from "react";
 import image from '../../assets/unnamed.jpg';
+import Footer from '../footer/footer'
 
 import './restaurant.scss'
 
@@ -15,7 +16,7 @@ const Restaurant = () => {
           <p>Description</p>
       </div>
 
-
+      <Footer/>
     </div>
   );
 };

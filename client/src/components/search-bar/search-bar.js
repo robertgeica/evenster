@@ -19,7 +19,8 @@ const SearchBar = ({ pubs }) => {
 		// console.log('loading pubs');
 	}, []);
 
-	const [ searchBy, setSearchBy ] = useState({});
+	const [ searchBy, setSearchBy ] = useState({
+	});
 	const handleChange = (text) => (e) => {
 		setSearchBy({ ...searchBy, [text]: e.target.value.toLowerCase() });
 		console.log(searchBy);
@@ -38,20 +39,17 @@ const SearchBar = ({ pubs }) => {
 
 				sPubs.push(pub);
 				store.dispatch(sortedPubs(sPubs));
-				setSearchBy({});
 		
 			
 		}else if(pub.pubAdress.toLowerCase().includes(searchBy.city)){
 			sPubs.push(pub);
 			store.dispatch(sortedPubs(sPubs));
-			setSearchBy({});
 		}else if(pub.pubCapacity >= searchBy.capacity&&parseInt(pub.pubCapacity) < parseInt(searchBy.capacity)+100){
 			sPubs.push(pub);
 			store.dispatch(sortedPubs(sPubs));
-			setSearchBy({});
 		}
 		
-		else{store.dispatch(sortedPubs(sPubs));setSearchBy({});}
+		else{store.dispatch(sortedPubs(sPubs))}
 		});
 	};
 
@@ -60,17 +58,17 @@ const SearchBar = ({ pubs }) => {
 			<form className="search-bar">
 				<div className="input-container">
 					<label htmlFor="search">Looking For</label>
-					<input name="search" type="text" onChange={handleChange('name')} />
+					<input name="search" type="text" value={searchBy.name===undefined?"":`${searchBy.name}`} onChange={handleChange('name')} />
 				</div>
 
 				<div className="input-container">
 					<label htmlFor="search">City</label>
-					<input name="search" type="text" onChange={handleChange('city')} />
+					<input name="search" type="text" value={searchBy.city==undefined?"":`${searchBy.city}`} onChange={handleChange('city')} />
 				</div>
 
 				<div className="input-container">
 					<label htmlFor="search">Capacity</label>
-					<input name="search" type="text" onChange={handleChange('capacity')} />
+					<input name="search" type="text" value={searchBy.capacity==undefined?"":`${searchBy.capacity}`} onChange={handleChange('capacity')} />
 				</div>
 
 				<div className="search-buttons">
